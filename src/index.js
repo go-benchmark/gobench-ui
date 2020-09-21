@@ -8,7 +8,7 @@ import ReactDOM from 'react-dom'
 import { createHashHistory } from 'history'
 import { createStore, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux'
-import { logger } from 'redux-logger'
+// import { logger } from 'redux-logger'
 import createSagaMiddleware from 'redux-saga'
 import { routerMiddleware } from 'connected-react-router'
 
@@ -27,9 +27,11 @@ const sagaMiddleware = createSagaMiddleware()
 const routeMiddleware = routerMiddleware(history)
 const middlewares = [sagaMiddleware, routeMiddleware]
 if (process.env.NODE_ENV === 'development') {
-  middlewares.push(logger)
+  // middlewares.push(logger)
 }
-const store = createStore(reducers(history), compose(applyMiddleware(...middlewares)))
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+
+const store = createStore(reducers(history), composeEnhancers(applyMiddleware(...middlewares)))
 sagaMiddleware.run(sagas)
 
 ReactDOM.render(

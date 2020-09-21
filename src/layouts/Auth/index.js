@@ -1,10 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Layout } from 'antd'
-import { Link, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import classNames from 'classnames'
-import Sidebar from 'components/cleanui/layout/Sidebar'
-import SupportChat from 'components/cleanui/layout/SupportChat'
 import Footer from 'components/cleanui/layout/Footer'
 import style from './style.module.scss'
 
@@ -60,8 +58,8 @@ const AuthLayout = ({
         </div>
       </Layout.Content>
       <Layout.Footer>
-            <Footer />
-          </Layout.Footer>
+        <Footer />
+      </Layout.Footer>
     </Layout>
   )
 }

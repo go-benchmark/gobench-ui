@@ -30,7 +30,6 @@ const AdvancedEmailTemplates = () => {
                       <td style={{ verticalAlign: 'top' }}>
                         <img
                           src="resources/images/tf-logo.png"
-                          alt="Clean UI KIT Pro"
                           style={{ height: '40px' }}
                         />
                       </td>
@@ -94,7 +93,6 @@ const AdvancedEmailTemplates = () => {
                       Unsubscribe
                     </a>
                     <br />
-                    Powered by Clean UI KIT Pro
                   </p>
                 </div>
               </div>
@@ -126,7 +124,6 @@ const AdvancedEmailTemplates = () => {
                       <td style={{ verticalAlign: 'top' }}>
                         <img
                           src="resources/images/tf-logo.png"
-                          alt="Clean UI KIT Pro"
                           style={{ height: '40px' }}
                         />
                       </td>
@@ -151,7 +148,7 @@ const AdvancedEmailTemplates = () => {
                             Password Reset
                           </h5>
                           <p>
-                            Seems like you forgot your password for Clean UI KIT Pro. If this is
+                            Seems like you forgot your password for  KIT Pro. If this is
                             true, click below to reset your password.
                           </p>
                           <div style={{ textAlign: 'center' }}>
@@ -196,7 +193,7 @@ const AdvancedEmailTemplates = () => {
                     Don&apos;t like these emails?{' '}
                     <a style={{ color: '#a09bb9', textDecoration: 'underline' }}>Unsubscribe</a>
                     <br />
-                    Powered by Clean UI KIT Pro
+                    Powered by gobench KIT Pro
                   </p>
                 </div>
               </div>
@@ -230,7 +227,7 @@ const AdvancedEmailTemplates = () => {
                       <td style={{ verticalAlign: 'top' }}>
                         <img
                           src="resources/images/tf-logo.png"
-                          alt="Clean UI KIT Pro"
+                          alt="gobench KIT Pro"
                           style={{ height: '40px' }}
                         />
                       </td>
@@ -602,7 +599,7 @@ const AdvancedEmailTemplates = () => {
                     Don&apos;t like these emails?{' '}
                     <a style={{ color: '#a09bb9', textDecoration: 'underline' }}>Unsubscribe</a>
                     <br />
-                    Powered by Clean UI KIT Pro
+                    Powered by gobench KIT Pro
                   </p>
                 </div>
               </div>
@@ -634,7 +631,7 @@ const AdvancedEmailTemplates = () => {
                       <td style={{ verticalAlign: 'top' }}>
                         <img
                           src="resources/images/tf-logo.png"
-                          alt="Clean UI KIT Pro"
+                          alt="gobench KIT Pro"
                           style={{ height: '40px' }}
                         />
                       </td>
@@ -719,7 +716,7 @@ const AdvancedEmailTemplates = () => {
                     Don&apos;t like these emails?{' '}
                     <a style={{ color: '#a09bb9', textDecoration: 'underline' }}>Unsubscribe</a>
                     <br />
-                    Powered by Clean UI KIT Pro
+                    Powered by gobench KIT Pro
                   </p>
                 </div>
               </div>

@@ -3,15 +3,15 @@ import store from 'store'
 
 export async function login (email, password) {
   return apiClient
-    .post('/user/login', {
+    .post('/users/login', {
       email,
       password
     })
     .then(response => {
       if (response) {
-        const { accessToken } = response.data
-        if (accessToken) {
-          store.set('accessToken', accessToken)
+        const { id } = response.data
+        if (id) {
+          store.set('accessToken', id)
         }
         return response.data
       }

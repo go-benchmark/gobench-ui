@@ -91,7 +91,7 @@ class CandleStickChartWithAnnotation extends React.Component {
           x={100}
           y={50}
           fontSize={12}
-          text='Clean UI React Admin Template'
+          text='Gobench'
           fontFamily='monospace'
         />
         <Chart id={1} yExtents={[d => [d.high, d.low]]} padding={{ top: 10, bottom: 20 }}>

@@ -34,6 +34,14 @@ export function * LOGIN ({ payload }) {
     // yield put({
     //   type: 'user/LOAD_CURRENT_ACCOUNT'
     // })
+    yield put({
+      type: 'user/SET_STATE',
+      payload: {
+        id: success.id,
+        loading: false,
+        authorized: true
+      }
+    })
     yield history.push('/')
     notification.success({
       message: 'Logged In',
@@ -133,7 +141,7 @@ export default function * rootSaga () {
     takeEvery(actions.LOGIN, LOGIN),
     takeEvery(actions.REGISTER, REGISTER),
     takeEvery(actions.LOAD_CURRENT_ACCOUNT, LOAD_CURRENT_ACCOUNT),
-    takeEvery(actions.LOGOUT, LOGOUT),
+    takeEvery(actions.LOGOUT, LOGOUT)
     // LOAD_CURRENT_ACCOUNT() // run once on app load to check user auth
   ])
 }
