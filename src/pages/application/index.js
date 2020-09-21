@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { Helmet } from 'react-helmet'
-import { Table, Button, Input,Popconfirm } from 'antd'
+import { Table, Button, Input, Popconfirm } from 'antd'
 import { connect } from 'react-redux'
-import { withRouter, Link ,useHistory} from 'react-router-dom'
+import { withRouter, Link, useHistory } from 'react-router-dom'
 
 const { Search } = Input
 const mapStateToProps = ({ application, zone, dispatch }) => ({ application, zone, dispatch })
@@ -15,7 +15,7 @@ const DefaultPage = ({ application, zone, dispatch }) => {
     current: 1,
     pageSize: 10,
     total: 0,
-    showTotal: (total, range) => `${range[0]}-${range[1]} trên ${total} trạm`
+    showTotal: (total, range) => `${range[0]}-${range[1]} of ${total} scenarios`
   })
   const columns = [
     {
@@ -71,7 +71,7 @@ const DefaultPage = ({ application, zone, dispatch }) => {
               onClick={() => clone(application)}
             >
               Clone
-                            </Button>
+            </Button>
             {['running', 'pending'].includes(application.status) && (
               <Popconfirm
                 title={`Are you sure cancel application ${application.name}?`}
@@ -85,7 +85,7 @@ const DefaultPage = ({ application, zone, dispatch }) => {
                   danger
                 >
                   Cancel
-                                </Button>
+                </Button>
               </Popconfirm>
             )}
             {['finished', 'pending', 'error', 'cancel'].includes(application.status) && (
@@ -101,7 +101,7 @@ const DefaultPage = ({ application, zone, dispatch }) => {
                   danger
                 >
                   Delete
-                                </Button>
+                </Button>
               </Popconfirm>
             )}
           </div>
@@ -160,7 +160,7 @@ const DefaultPage = ({ application, zone, dispatch }) => {
   return (
     <>
       <div className='application' onKeyUp={onSearch}>
-        <Helmet title='Trạm Biến Áp' />
+        <Helmet title='Applications' />
         <div className='application-header'>
           <div className='row'>
             <div className='col-md-6 col-xs-12'>

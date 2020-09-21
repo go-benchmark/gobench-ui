@@ -5,14 +5,14 @@ import { eachLimit } from 'async'
 import { get, maxBy, orderBy } from 'lodash'
 import { getChartData, getDataByType } from 'utils/chart'
 const API = {
-  list: '/application',
-  detail: '/application/{0}',
-  create: '/application',
-  update: '/application/{0}',
-  delete: '/application/{0}',
+  list: '/applications',
+  detail: '/applications/{0}',
+  create: '/applications',
+  update: '/applications/{0}',
+  delete: '/applications/{0}',
   // other apis
-  cancel: '/application/{0}/cancel',
-  groups: '/application/{0}/groups',
+  cancel: '/applications/{0}/cancel',
+  groups: '/applications/{0}/groups',
   graphs: '/groups/{0}/graphs',
   graphMetrics: '/graphs/{0}/metrics',
   counters: '/metrics/{0}/counters',

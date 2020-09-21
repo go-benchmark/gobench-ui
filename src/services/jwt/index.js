@@ -41,19 +41,11 @@ export async function register (email, password, name) {
 }
 
 export async function currentAccount () {
-  return apiClient
-    .get('/auth/account')
-    .then(response => {
-      if (response) {
-        const { accessToken } = response.data
-        if (accessToken) {
-          store.set('accessToken', accessToken)
-        }
-        return response.data
-      }
-      return false
-    })
-    .catch(err => console.log(err))
+  const accessToken = store.get('accessToken')
+  if (!accessToken) {
+    return false
+  }
+  return accessToken
 }
 
 export async function logout () {
