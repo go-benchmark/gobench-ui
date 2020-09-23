@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { Helmet } from 'react-helmet'
-import { Table, Tag, Button, Popconfirm } from 'antd'
+import { Table, Tag, Button, Popconfirm, Tooltip } from 'antd'
 import { connect } from 'react-redux'
 import { withRouter, Link, useHistory } from 'react-router-dom'
 import { statusColors, formatTag } from 'utils/status'
+import { RetweetOutlined } from '@ant-design/icons'
 
 const mapStateToProps = ({ application, dispatch }) => ({ application, dispatch })
 
@@ -166,6 +167,7 @@ const DefaultPage = ({ application, dispatch }) => {
       payload: { id }
     })
   }
+  console.log(loading)
   return (
     <>
       <div className='application' onKeyUp={onSearch}>
@@ -181,6 +183,13 @@ const DefaultPage = ({ application, dispatch }) => {
             </div>
             <div className='col-md-6'>
               <div className='text-right'>
+                <Tooltip title='Refresh'>
+                  <Button
+                    icon={<RetweetOutlined />}
+                    style={{ marginRight: 5 }}
+                    onClick={onSearch}
+                  />
+                </Tooltip>
                 <Button type='primary' onClick={() => history.push('/applications/create')}>Create Application</Button>
               </div>
             </div>

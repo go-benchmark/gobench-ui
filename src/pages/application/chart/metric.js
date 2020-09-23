@@ -42,12 +42,11 @@ const DefaultPage = ({ detail, graph, graphMetrics, metricDatas, unit, timeRange
   useInterval(() => {
     dispatch({
       type: 'application/METRIC_DATA_POLLING',
-      payload: { metrics: metricData.metrics }
+      payload: { id: graph.id, metrics, data: metricData.metrics }
     })
   }, isRealtime ? INTERVAL : null)
 
   if (metricType === METRIC_TYPE.HISTOGRAM) {
-    console.log('metrict', metricType)
     series = [...makeHistogramSeriesData(get(metricData.metrics, '[0].chartData.data', []))]
   } else {
     if (isArray(metricData.metrics)) {
@@ -58,7 +57,6 @@ const DefaultPage = ({ detail, graph, graphMetrics, metricDatas, unit, timeRange
     }
   }
   const chartData = isRealtime ? makeChartDataByTimeRange(series, timeRange) : series
-  console.log('check', metricType, chartData)
   return (
     <>
       <Suspense fallback={loading()}>

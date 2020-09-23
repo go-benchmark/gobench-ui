@@ -150,7 +150,7 @@ export const getMetricDataRealtime = async (metrics, timeRange = 3600, timestamp
  * @param oldData
  * @returns {Promise<unknown[]>}
  */
-export const getMetricDataPolling = async (metrics, oldData = null) => {
+export const getMetricDataPolling = async (metrics, oldData = []) => {
   return await mapLimit(metrics, 5, async (mtr) => {
     const oldMetricData = oldData.find(o => mtr.id === get(o, ['id'], ''))
     const timestamp = get(oldMetricData, 'lastTimestamp', '')
