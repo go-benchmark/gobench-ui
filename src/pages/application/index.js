@@ -177,7 +177,7 @@ const DefaultPage = ({ application, dispatch }) => {
           <div className='card-header row'>
             <div className='col-md-6'>
               <div className='cui__utils__heading mb-0'>
-                <strong>Benchmark Application</strong>
+                <h2>Benchmark Application</h2>
               </div>
               <div className='text-muted'>A distributed benchmark tool with Golang</div>
             </div>
