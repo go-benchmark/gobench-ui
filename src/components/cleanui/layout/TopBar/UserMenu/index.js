@@ -25,7 +25,7 @@ const ProfileMenu = ({ dispatch, user }) => {
     <Menu selectable={false}>
       <Menu.Item>
         <strong>
-          <FormattedMessage id="" />, {user.name || 'Anonymous'}
+          <FormattedMessage id="administrator" />
         </strong>
         {/* <div>
           <strong className="mr-1">
@@ -33,15 +33,15 @@ const ProfileMenu = ({ dispatch, user }) => {
           </strong>
           Professional
         </div> */}
-        <div>
+        {/* <div>
           <strong>
             <FormattedMessage id="topBar.profileMenu.role" />:{' '}
           </strong>
           {user.role || '—'}
-        </div>
+        </div> */}
       </Menu.Item>
       <Menu.Divider />
-      <Menu.Item>
+      {/* <Menu.Item>
         <div>
           <strong>
             <FormattedMessage id="topBar.profileMenu.email" />:{' '}
@@ -53,15 +53,15 @@ const ProfileMenu = ({ dispatch, user }) => {
           </strong>
           {user.phone || '—'}
         </div>
-      </Menu.Item>
-      <Menu.Divider />
-      <Menu.Item>
+      </Menu.Item> */}
+      {/* <Menu.Divider /> */}
+      {/* <Menu.Item>
         <a href="#" onClick={e => e.preventDefault()}>
           <i className="fe fe-user mr-2" />
           <FormattedMessage id="topBar.profileMenu.editProfile" />
         </a>
       </Menu.Item>
-      <Menu.Divider />
+      <Menu.Divider /> */}
       <Menu.Item>
         <a href="#" onClick={logout}>
           <i className="fe fe-log-out mr-2" />

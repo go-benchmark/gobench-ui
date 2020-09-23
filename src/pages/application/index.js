@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { Helmet } from 'react-helmet'
-import { Table, Button, Input, Popconfirm } from 'antd'
+import { Table, Button, Popconfirm } from 'antd'
 import { connect } from 'react-redux'
 import { withRouter, Link, useHistory } from 'react-router-dom'
 
-const { Search } = Input
-const mapStateToProps = ({ application, zone, dispatch }) => ({ application, zone, dispatch })
+const mapStateToProps = ({ application, dispatch }) => ({ application, dispatch })
 
-const DefaultPage = ({ application, zone, dispatch }) => {
+const DefaultPage = ({ application, dispatch }) => {
   const history = useHistory()
   const { list, loading, total } = application
   const [fetching, setFetching] = useState(false)

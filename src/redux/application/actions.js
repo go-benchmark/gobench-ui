@@ -1,6 +1,11 @@
 // define some action
 const actions = {
   SET_STATE: 'application/SET_STATE',
+  SET_GRAPH_STATE: 'application/SET_GRAPH_STATE',
+  SET_GRAPH_METRIC_STATE: 'application/SET_GRAPH_METRIC_STATE',
+  SET_METRIC_STATE: 'application/SET_METRIC_STATE',
+  SET_METRIC_DATA_REALTIME: 'application/SET_METRIC_DATA_REALTIME',
+  SET_GRAPH_METRIC_DATA: 'application/SET_GRAPH_METRIC_DATA',
   LIST: 'application/LIST',
   DETAIL: 'application/DETAIL',
   CREATE: 'application/CREATE',
@@ -19,8 +24,8 @@ const actions = {
   // complex
   METRIC_INTERVAL: 'application/METRIC_INTERVAL',
   METRIC_DATA: 'application/METRIC_DATA',
-  METRIC_DATA_REALTIME:  'application/METRIC_DATA_REALTIME',
-  METRIC_DATA_POLLING:  'application/METRIC_DATA_POLLING',
+  GRAPH_METRIC_DATA: 'application/GRAPH_METRIC_DATA',
+  METRIC_DATA_POLLING: 'application/METRIC_DATA_POLLING'
 
 }
 

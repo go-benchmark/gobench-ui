@@ -1,7 +1,7 @@
 import apiClient from 'services/axios'
 import { init, listApi, detailApi, createApi, updateApi, destroyApi } from '../index'
 import { METRIC_TYPE } from 'constant'
-import { eachLimit } from 'async'
+import { mapLimit } from 'async'
 import { get, maxBy, orderBy } from 'lodash'
 import { getChartData, getDataByType } from 'utils/chart'
 const API = {
@@ -65,25 +65,25 @@ export const getGraphMetrics = async (id) => {
     return response.data
   }
 }
-export const getCounters = async (id, from, end) => {
+export const getCounters = async (id, from = '', end = '') => {
   const response = await apiClient.get(`${API.counters.format(id)}${from}${end}`)
   if (response) {
     return response.data
   }
 }
-export const getHistograms = async (id, from, end) => {
+export const getHistograms = async (id, from = '', end = '') => {
   const response = await apiClient.get(`${API.histograms.format(id)}${from}${end}`)
   if (response) {
     return response.data
   }
 }
-export const getGauges = async (id, from, end) => {
+export const getGauges = async (id, from = '', end = '') => {
   const response = await apiClient.get(`${API.gauges.format(id)}${from}${end}`)
   if (response) {
     return response.data
   }
 }
-export const getMetrics = async (id, from, end) => {
+export const getMetrics = async (id, from = '', end = '') => {
   const response = await apiClient.get(`${API.metrics.format(id)}${from}${end}`)
   if (response) {
     return response.data
@@ -115,8 +115,9 @@ export const getMetricData = async (id = 0, type = METRIC_TYPE.COUNTER, fromTime
 
 export const getMetricDataRealtime = async (metrics, timeRange = 3600, timestamp, isRealtime) => {
   const now = new Date().getTime()
+  console.log('getMetricDataRealtime', timestamp, metrics)
   const fromTime = Math.round((now - timestamp) / 1000) < timeRange ? timestamp : (now - (timeRange * 1000))
-  return eachLimit(metrics, 5, async (m) => {
+  return await mapLimit(metrics, 5, async (m) => {
     let response
     if (isRealtime) {
       response = await getMetricData(m.id, m.type, fromTime, now)
@@ -151,7 +152,7 @@ export const getMetricDataRealtime = async (metrics, timeRange = 3600, timestamp
  * @returns {Promise<unknown[]>}
  */
 export const getMetricDataPolling = async (metrics, oldData = null) => {
-  return eachLimit(metrics, 5, async (mtr) => {
+  return await mapLimit(metrics, 5, async (mtr) => {
     const oldMetricData = oldData.find(o => mtr.id === get(o, ['id'], ''))
     const timestamp = get(oldMetricData, 'lastTimestamp', '')
     if (!timestamp) {

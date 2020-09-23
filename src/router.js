@@ -13,6 +13,11 @@ const routes = [
     Component: lazy(() => import('pages/application')),
     exact: true
   },
+  {
+    path: '/applications/:id',
+    Component: lazy(() => import('pages/application/detail')),
+    exact: true
+  },
   // Auth Pages
   {
     path: '/auth/login',

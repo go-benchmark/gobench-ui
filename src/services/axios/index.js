@@ -23,8 +23,17 @@ apiClient.interceptors.request.use(request => {
 apiClient.interceptors.response.use(undefined, error => {
   // Errors handling
   const { response } = error
-  const { data } = response
+  if (!response) {
+    notification.warning({
+      message: 'request failed!'
+    })
+    return
+  }
+  let { data, statusText } = response
   if (data) {
+    if (typeof data === 'object') {
+      data = statusText
+    }
     notification.warning({
       message: data
     })

@@ -5,7 +5,7 @@ import {
   getGroups, getGraphs, getGraphMetrics, getCounters, getHistograms, getGauges, getMetrics, getMetricData, getMetricDataRealtime, getMetricDataPolling
 } from 'services/application'
 
-export function* LIST({ payload }) {
+export function * LIST ({ payload }) {
   const { skip, limit, name, zone, dtms } = payload
   loading(true)
   const response = yield call(list, skip, limit, name, zone, dtms)
@@ -20,7 +20,7 @@ export function* LIST({ payload }) {
   }
   loading(false)
 }
-export function* DETAIL({ payload }) {
+export function * DETAIL ({ payload }) {
   const { id } = payload
   loading(true)
   const response = yield call(detail, id)
@@ -34,7 +34,7 @@ export function* DETAIL({ payload }) {
   }
   loading(false)
 }
-export function* CREATE({ payload }) {
+export function * CREATE ({ payload }) {
   const { data } = payload
   loading(true)
   const response = yield call(create, data)
@@ -48,7 +48,7 @@ export function* CREATE({ payload }) {
   }
   loading(false)
 }
-export function* CLONE({ payload }) {
+export function * CLONE ({ payload }) {
   const { data } = payload
   yield put({
     type: 'application/SET_STATE',
@@ -57,7 +57,7 @@ export function* CLONE({ payload }) {
     }
   })
 }
-export function* UPDATE({ payload }) {
+export function * UPDATE ({ payload }) {
   const { id, data } = payload
   loading(true)
   const response = yield call(update, id, data)
@@ -71,7 +71,7 @@ export function* UPDATE({ payload }) {
   }
   loading(false)
 }
-export function* CANCEL({ payload }) {
+export function * CANCEL ({ payload }) {
   const { id, data } = payload
   loading(true)
   const response = yield call(cancel, id, data)
@@ -85,7 +85,7 @@ export function* CANCEL({ payload }) {
   }
   loading(false)
 }
-export function* DELETE({ payload }) {
+export function * DELETE ({ payload }) {
   const { id } = payload
   loading(true)
   const response = yield call(destroy, id)
@@ -99,8 +99,9 @@ export function* DELETE({ payload }) {
   }
   loading(false)
 }
-export function* GROUPS({ payload }) {
+export function * GROUPS ({ payload }) {
   const { id } = payload
+
   loading(true)
   const response = yield call(getGroups, id)
   if (response) {
@@ -113,35 +114,8 @@ export function* GROUPS({ payload }) {
   }
   loading(false)
 }
-export function* GRAPHS({ payload }) {
-  const { id } = payload
-  loading(true)
-  const response = yield call(getGraphs, id)
-  if (response) {
-    yield put({
-      type: 'application/SET_STATE',
-      payload: {
-        graphs: response
-      }
-    })
-  }
-  loading(false)
-}
-export function* GRAPH_METRICS({ payload }) {
-  const { id } = payload
-  loading(true)
-  const response = yield call(getGraphMetrics, id)
-  if (response) {
-    yield put({
-      type: 'application/SET_STATE',
-      payload: {
-        graphMetrics: response
-      }
-    })
-  }
-  loading(false)
-}
-export function* COUNTERS({ payload }) {
+
+export function * COUNTERS ({ payload }) {
   const { id, from, end } = payload
   loading(true)
   const response = yield call(getCounters, id, from, end)
@@ -155,7 +129,7 @@ export function* COUNTERS({ payload }) {
   }
   loading(false)
 }
-export function* HISTOGRAMS({ payload }) {
+export function * HISTOGRAMS ({ payload }) {
   const { id, from, end } = payload
   loading(true)
   const response = yield call(getHistograms, id, from, end)
@@ -169,7 +143,7 @@ export function* HISTOGRAMS({ payload }) {
   }
   loading(false)
 }
-export function* GAUGES({ payload }) {
+export function * GAUGES ({ payload }) {
   const { id, from, end } = payload
   loading(true)
   const response = yield call(getGauges, id, from, end)
@@ -183,7 +157,7 @@ export function* GAUGES({ payload }) {
   }
   loading(false)
 }
-export function* METRICS({ payload }) {
+export function * METRICS ({ payload }) {
   const { id, from, end } = payload
   loading(true)
   const response = yield call(getMetrics, id, from, end)
@@ -197,7 +171,7 @@ export function* METRICS({ payload }) {
   }
   loading(false)
 }
-export function* METRIC_DATA({ payload }) {
+export function * METRIC_DATA ({ payload }) {
   const { id, type, fromTime, toTime } = payload
   loading(true)
   const response = yield call(getMetricData, id, type, fromTime, toTime)
@@ -211,22 +185,104 @@ export function* METRIC_DATA({ payload }) {
   }
   loading(false)
 }
-export function* METRIC_DATA_REALTIME({ payload }) {
-  const { metrics, timeRange, timestamp, isRealtime } = payload
+export function * GRAPHS ({ payload }) {
+  const { id } = payload
   loading(true)
-
-  const response = yield call(getMetricDataRealtime, metrics, timeRange, timestamp, isRealtime)
+  const response = yield call(getGraphs, id)
   if (response) {
+    const graphs = yield response.map(x => {
+      x.groupId = id
+      return x
+    })
     yield put({
-      type: 'application/SET_STATE',
+      type: 'application/SET_GRAPH_STATE',
       payload: {
-        metricDatas: response
+        graphs
       }
     })
   }
   loading(false)
 }
-export function* METRIC_DATA_POLLING({ payload }) {
+export function * GRAPH_METRICS ({ payload }) {
+  const { id } = payload
+
+  loading(true)
+  const response = yield call(getGraphMetrics, id)
+  if (response) {
+    yield put({
+      type: 'application/SET_GRAPH_METRIC_STATE',
+      payload: {
+        graphId: id,
+        metrics: response
+      }
+    })
+  }
+  loading(false)
+}
+export function * GRAPH_METRIC_DATA ({ payload }) {
+  const { id, metrics, timeRange, timestamp, isRealtime } = payload
+  loading(true)
+  const response = yield call(getMetricDataRealtime, metrics, timeRange, timestamp, isRealtime)
+  if (response) {
+    console.log('res', response)
+
+    yield put({
+      type: 'application/SET_GRAPH_METRIC_DATA',
+      payload: {
+        graphId: id,
+        metrics: response
+      }
+    })
+  }
+  loading(false)
+}
+// export function * GRAPH_METRIC_DATA ({ payload }) {
+//   let { metrics, timeRange, timestamp, isRealtime } = payload
+//   if (!timeRange) {
+//     timeRange = 3600
+//   }
+//   const now = new Date().getTime()
+//   const fromTime = Math.round((now - timestamp) / 1000) < timeRange ? timestamp : (now - (timeRange * 1000))
+//   loading(true)
+//   const data = yield mapLimit(metrics, 5, function * (m) {
+//     let response
+//     if (isRealtime) {
+//       response = yield call(getMetricData, m.id, m.type, fromTime, now)
+//     } else {
+//       response = yield call(getMetricData, m.id, m.type)
+//     }
+//     if (response.length === 0) {
+//       return {
+//         ...m,
+//         lastTimestamp: timestamp,
+//         chartData: {
+//           name: m.title,
+//           data: []
+//         }
+//       }
+//     }
+//     const lastTimestamp = get(maxBy(response, m => m.time), 'time')
+//     return {
+//       ...m,
+//       lastTimestamp,
+//       chartData: {
+//         name: m.title,
+//         data: m.type === METRIC_TYPE.HISTOGRAM ? response : getChartData(m.type, response)
+//       }
+//     }
+//   })
+//   if (data) {
+//     console.log('res', data)
+//     yield put({
+//       type: 'application/SET_GRAPH_METRIC_DATA',
+//       payload: {
+//         metrics: data
+//       }
+//     })
+//   }
+//   loading(false)
+// }
+export function * METRIC_DATA_POLLING ({ payload }) {
   const { metrics, oldData } = payload
   loading(true)
   const response = yield call(getMetricDataPolling, metrics, oldData)
@@ -234,13 +290,13 @@ export function* METRIC_DATA_POLLING({ payload }) {
     yield put({
       type: 'application/SET_STATE',
       payload: {
-        metricDatas: response
+        metricDataRealtime: response
       }
     })
   }
   loading(false)
 }
-function* loading(isLoading = false) {
+function * loading (isLoading = false) {
   yield put({
     type: 'application/SET_STATE',
     payload: {
@@ -248,7 +304,7 @@ function* loading(isLoading = false) {
     }
   })
 }
-export default function* rootSaga() {
+export default function * rootSaga () {
   yield all([
     takeEvery(actions.LIST, LIST),
     takeEvery(actions.DETAIL, DETAIL),
@@ -266,7 +322,7 @@ export default function* rootSaga() {
     takeEvery(actions.GAUGES, GAUGES),
     takeEvery(actions.METRICS, METRICS),
     takeEvery(actions.METRIC_DATA, METRIC_DATA),
-    takeEvery(actions.METRIC_DATA_REALTIME, METRIC_DATA_REALTIME),
+    takeEvery(actions.GRAPH_METRIC_DATA, GRAPH_METRIC_DATA),
     takeEvery(actions.METRIC_DATA_POLLING, METRIC_DATA_POLLING)
   ])
 }
