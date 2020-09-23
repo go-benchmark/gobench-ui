@@ -23,6 +23,12 @@ const TopBar = () => {
       <div className="mr-auto">
         {/* <Search /> */}
       </div>
+      <div className="text-right" style={{marginRight:10,opacity:0.7}}>
+        <img width='24px' src='/resources/images/GitHub-Mark-32px.png'/>
+          <a href="https://github.com/gobench-io/gobench" target="_blank" rel="noopener noreferrer">
+          &nbsp;Documentation
+          </a>
+      </div>
       {/* <div className="mr-4 d-none d-md-block">
         <IssuesHistory />
       </div>

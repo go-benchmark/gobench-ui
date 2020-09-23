@@ -6,6 +6,7 @@ import { withRouter, useParams, useHistory } from 'react-router-dom'
 import Dashboard from './dashboard'
 import Scenario from './scenario'
 import { statusColors } from 'utils/status'
+import 'css/index.css'
 
 const { TabPane } = Tabs
 

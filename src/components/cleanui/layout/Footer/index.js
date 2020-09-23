@@ -16,9 +16,9 @@ const Footer = () => {
         </a>
         <br />
         <p className="mb-0">
-        A distributed benchmark tool with Golang | <img src='/resources/images/GitHub-Mark-32px.png'/>
-          <a href="https://www.google.com/privacy" target="_blank" rel="noopener noreferrer">
-            Documentation
+        A distributed benchmark tool with Golang | <img width='24px' src='/resources/images/GitHub-Mark-32px.png'/>
+          <a href="https://github.com/gobench-io/gobench" target="_blank" rel="noopener noreferrer">
+          &nbsp;Documentation
           </a>
         </p>
       </div>

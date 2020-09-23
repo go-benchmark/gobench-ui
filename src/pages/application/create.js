@@ -77,18 +77,18 @@ const DefaultPage = ({ loading, clone, dispatch }) => {
   }
   return (
     <>
-      <div className='card container'>
+      <div className='container'>
         <div className='card'>
           <div className='card-header row'>
             <div className='col-md-6'>
               <div className='cui__utils__heading mb-0'>
-                <strong>Create new Application</strong>
+                <h3>Create new Application</h3>
               </div>
               <div className='text-muted'>Tips: You can clone another application and run again!</div>
             </div>
             <div className='col-md-6'>
               <div className='text-right'>
-                <Button type='default' onClick={() => history.push('/applications')}>Back</Button>
+                <Button type='default' size='large' onClick={() => history.push('/applications')}>Back</Button>
               </div>
             </div>
           </div>
@@ -101,33 +101,22 @@ const DefaultPage = ({ loading, clone, dispatch }) => {
               className='mb-4'
               form={form}
             >
-              <Button
-                type='primary'
-                size='large'
-                className='text-center w-100'
-                htmlType='submit'
-                loading={loading}
-              >
-                <strong>Create</strong>
-              </Button>
-              <Button htmlType='button' onClick={onReset}>
-          Reset
-              </Button>
-              <Button
-                onClick={onCancel}
-              >
-                <strong>Cancel</strong>
-              </Button>
               <Item
                 name='name'
                 rules={[{ required: true, message: 'Application name is required' }]}
               >
+                <h4 className='mb-2'>
+                  <strong>Application Name</strong>
+                </h4>
                 <Input />
               </Item>
               <Item
                 name='scenario'
                 rules={[{ required: true, message: 'Scenario is required' }]}
               >
+                <h4 className='mb-2'>
+                  <strong>Scenario</strong>
+                </h4>
                 <div className='editor-container'>
                   <Editor
                     value={scenario}
@@ -149,6 +138,9 @@ const DefaultPage = ({ loading, clone, dispatch }) => {
                 name='gomod'
                 rules={[{ required: false }]}
               >
+                <h4 className='mb-2'>
+                  <strong>gomod</strong>
+                </h4>
                 <div className='editor-container'>
                   <Editor
                     value={gomod}
@@ -169,6 +161,9 @@ const DefaultPage = ({ loading, clone, dispatch }) => {
                 name='gosum'
                 rules={[{ required: false }]}
               >
+                <h4 className='mb-2'>
+                  <strong>gosum</strong>
+                </h4>
                 <div className='editor-container'>
                   <Editor
                     value={gosum}
@@ -185,6 +180,32 @@ const DefaultPage = ({ loading, clone, dispatch }) => {
                   />
                 </div>
               </Item>
+              <div className='text-right'>
+                <Button
+                  type='primary'
+                  size='large'
+                  htmlType='submit'
+                  loading={loading}
+                >
+                  <strong>Create</strong>
+                </Button>
+                <Button
+                  size='large'
+                  type='dashed'
+                  style={{ marginLeft: 5 }}
+                  danger
+                  onClick={onReset}
+                >
+                Reset
+                </Button>
+                <Button
+                  size='large'
+                  style={{ marginLeft: 5 }}
+                  onClick={onCancel}
+                >
+                  <strong>Cancel</strong>
+                </Button>
+              </div>
             </Form>
           </div>
         </div>
