@@ -1,6 +1,6 @@
 {
-  "name": "dtms-frontend",
-  "author": "ubisen",
+  "name": "gobench-ui",
+  "author": "verik",
   "version": "1.0.0",
   "private": true,
   "scripts": {
