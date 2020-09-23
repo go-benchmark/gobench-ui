@@ -263,8 +263,6 @@ export function * GRAPH_METRIC_DATA ({ payload }) {
   loading(true)
   const response = yield call(getMetricDataRealtime, metrics, timeRange, timestamp, isRealtime)
   if (response) {
-    console.log('res', response)
-
     yield put({
       type: 'application/SET_GRAPH_METRIC_DATA',
       payload: {

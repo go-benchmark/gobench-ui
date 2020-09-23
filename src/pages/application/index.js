@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { Helmet } from 'react-helmet'
-import { Table, Button, Popconfirm } from 'antd'
+import { Table, Tag, Button, Popconfirm } from 'antd'
 import { connect } from 'react-redux'
 import { withRouter, Link, useHistory } from 'react-router-dom'
+import { statusColors, formatTag } from 'utils/status'
 
 const mapStateToProps = ({ application, dispatch }) => ({ application, dispatch })
 
@@ -26,7 +27,13 @@ const DefaultPage = ({ application, dispatch }) => {
       title: 'Status',
       dataIndex: 'status',
       key: 'status',
-      render: (text, item) => <Link key={item.id} to={`/applications/${item.id}`}>{text}</Link>
+      render: (text, item) => (
+        <>
+          <Tag color={statusColors[text]} key={item.id}>
+            {text.toUpperCase()}
+          </Tag>
+        </>
+      )
     },
     {
       title: 'Name',
@@ -35,14 +42,25 @@ const DefaultPage = ({ application, dispatch }) => {
       render: (text, item) => <Link key={item.id} to={`/applications/${item.id}`}>{text}</Link>
     },
     {
-      title: 'Tag',
-      dataIndex: 'tag',
-      key: 'tag',
-      render: (text, item) => <Link key={item.id} to={`/applications/${item.id}`}>{text}</Link>
+      title: 'Tags',
+      dataIndex: 'tags',
+      key: 'tags',
+      render: (text) => {
+        return (
+          <>
+            {formatTag(text).map(x => (
+              <Tag color={x.color} key={x.index}>
+                {x.text}
+              </Tag>
+
+            ))}
+          </>
+        )
+      }
     },
     {
       title: 'Created at',
-      dataIndex: 'created',
+      dataIndex: 'created_at',
       key: 'created',
       render: x => {
         return new Date(x).toLocaleString()
@@ -152,31 +170,41 @@ const DefaultPage = ({ application, dispatch }) => {
     <>
       <div className='application' onKeyUp={onSearch}>
         <Helmet title='Applications' />
-        <div className='application-header'>
-          <div className='row'>
-            <div className='col-md-6 col-xs-12'>
-              <h2>Benchmark Application</h2>
+
+        <div className='card'>
+          <div className='card-header row'>
+            <div className='col-md-6'>
+              <div className='cui__utils__heading mb-0'>
+                <strong>Benchmark Application</strong>
+              </div>
+              <div className='text-muted'>A distributed benchmark tool with Golang</div>
             </div>
-            <div className='col-md-6 col-xs-12'>
-              <Button onClick={() => history.push('/applications/create')}>Create Application</Button>
-            </div>
-          </div>
-          <div className='search-bar'>
-            <div className='row'>
-              <div className='col-md-3 col-xs-12'>
-                {/* <Search placeholder='input application name or tags' onSearch={value => onSearch(value)}>Search</Search> */}
+            <div className='col-md-6'>
+              <div className='text-right'>
+                <Button type='primary' onClick={() => history.push('/applications/create')}>Create Application</Button>
               </div>
             </div>
           </div>
+          <div className='card-body'>
+            <div className='application-header'>
+              <div className='search-bar'>
+                <div className='row'>
+                  <div className='col-md-3 col-xs-12'>
+                    {/* <Search placeholder='input application name or tags' onSearch={value => onSearch(value)}>Search</Search> */}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <Table
+              dataSource={list}
+              pagination={pagination}
+              loading={loading}
+              columns={columns}
+              onChange={onTableChange}
+              ellipsis
+            />
+          </div>
         </div>
-        <Table
-          dataSource={list}
-          pagination={pagination}
-          loading={loading}
-          columns={columns}
-          onChange={onTableChange}
-          ellipsis
-        />
       </div>
     </>
   )

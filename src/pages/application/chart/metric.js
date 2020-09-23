@@ -47,7 +47,8 @@ const DefaultPage = ({ detail, graph, graphMetrics, metricDatas, unit, timeRange
   }, isRealtime ? INTERVAL : null)
 
   if (metricType === METRIC_TYPE.HISTOGRAM) {
-    series = [...makeHistogramSeriesData(get(metricDatas, '[0].chartData.data', []))]
+    console.log('metrict', metricType)
+    series = [...makeHistogramSeriesData(get(metricData.metrics, '[0].chartData.data', []))]
   } else {
     if (isArray(metricData.metrics)) {
       series = metricData.metrics.map(d => get(d, 'chartData', {
@@ -57,8 +58,7 @@ const DefaultPage = ({ detail, graph, graphMetrics, metricDatas, unit, timeRange
     }
   }
   const chartData = isRealtime ? makeChartDataByTimeRange(series, timeRange) : series
-  console.log('chartData', chartData)
-
+  console.log('check', metricType, chartData)
   return (
     <>
       <Suspense fallback={loading()}>

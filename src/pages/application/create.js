@@ -78,102 +78,116 @@ const DefaultPage = ({ loading, clone, dispatch }) => {
   return (
     <>
       <div className='card container'>
-        <div className='text-dark font-size-24 mb-3'>
-          <strong>Create an application</strong>
-        </div>
-        <Form
-          layout='vertical'
-          hideRequiredMark
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
-          className='mb-4'
-          form={form}
-        >
-          <Button
-            type='primary'
-            size='large'
-            className='text-center w-100'
-            htmlType='submit'
-            loading={loading}
-          >
-            <strong>Create</strong>
-          </Button>
-          <Button htmlType='button' onClick={onReset}>
+        <div className='card'>
+          <div className='card-header row'>
+            <div className='col-md-6'>
+              <div className='cui__utils__heading mb-0'>
+                <strong>Create new Application</strong>
+              </div>
+              <div className='text-muted'>Tips: You can clone another application and run again!</div>
+            </div>
+            <div className='col-md-6'>
+              <div className='text-right'>
+                <Button type='default' onClick={() => history.push('/applications')}>Back</Button>
+              </div>
+            </div>
+          </div>
+          <div className='card-body'>
+            <Form
+              layout='vertical'
+              hideRequiredMark
+              onFinish={onFinish}
+              onFinishFailed={onFinishFailed}
+              className='mb-4'
+              form={form}
+            >
+              <Button
+                type='primary'
+                size='large'
+                className='text-center w-100'
+                htmlType='submit'
+                loading={loading}
+              >
+                <strong>Create</strong>
+              </Button>
+              <Button htmlType='button' onClick={onReset}>
           Reset
-          </Button>
-          <Button
-            onClick={onCancel}
-          >
-            <strong>Cancel</strong>
-          </Button>
-          <Item
-            name='name'
-            rules={[{ required: true, message: 'Application name is required' }]}
-          >
-            <Input />
-          </Item>
-          <Item
-            name='scenario'
-            rules={[{ required: true, message: 'Scenario is required' }]}
-          >
-            <div className='editor-container'>
-              <Editor
-                value={scenario}
-                onValueChange={c => onChange('scenario', c)}
-                highlight={code => highlight((code || ''), languages.go, 'go')}
-                padding={16}
-                tabSize={4}
-                insertSpaces
-                className='editor'
-                autoFocus
-                style={{
-                  fontFamily: '"Arial", "Open Sans", monospace',
-                  fontSize: 14
-                }}
-              />
-            </div>
-          </Item>
-          <Item
-            name='gomod'
-            rules={[{ required: false }]}
-          >
-            <div className='editor-container'>
-              <Editor
-                value={gomod}
-                onValueChange={c => onChange('gomod', c)}
-                highlight={code => highlight((code || ''), languages.go, 'go')}
-                padding={16}
-                tabSize={4}
-                insertSpaces
-                className='editor'
-                style={{
-                  fontFamily: '"Arial", "Open Sans", monospace',
-                  fontSize: 14
-                }}
-              />
-            </div>
-          </Item>
-          <Item
-            name='gosum'
-            rules={[{ required: false }]}
-          >
-            <div className='editor-container'>
-              <Editor
-                value={gosum}
-                onValueChange={c => onChange('gosum', c)}
-                highlight={code => highlight((code || ''), languages.go, 'go')}
-                padding={16}
-                tabSize={4}
-                insertSpaces
-                className='editor'
-                style={{
-                  fontFamily: '"Arial", "Open Sans", monospace',
-                  fontSize: 14
-                }}
-              />
-            </div>
-          </Item>
-        </Form>
+              </Button>
+              <Button
+                onClick={onCancel}
+              >
+                <strong>Cancel</strong>
+              </Button>
+              <Item
+                name='name'
+                rules={[{ required: true, message: 'Application name is required' }]}
+              >
+                <Input />
+              </Item>
+              <Item
+                name='scenario'
+                rules={[{ required: true, message: 'Scenario is required' }]}
+              >
+                <div className='editor-container'>
+                  <Editor
+                    value={scenario}
+                    onValueChange={c => onChange('scenario', c)}
+                    highlight={code => highlight((code || ''), languages.go, 'go')}
+                    padding={16}
+                    tabSize={4}
+                    insertSpaces
+                    className='editor'
+                    autoFocus
+                    style={{
+                      fontFamily: '"Arial", "Open Sans", monospace',
+                      fontSize: 14
+                    }}
+                  />
+                </div>
+              </Item>
+              <Item
+                name='gomod'
+                rules={[{ required: false }]}
+              >
+                <div className='editor-container'>
+                  <Editor
+                    value={gomod}
+                    onValueChange={c => onChange('gomod', c)}
+                    highlight={code => highlight((code || ''), languages.go, 'go')}
+                    padding={16}
+                    tabSize={4}
+                    insertSpaces
+                    className='editor'
+                    style={{
+                      fontFamily: '"Arial", "Open Sans", monospace',
+                      fontSize: 14
+                    }}
+                  />
+                </div>
+              </Item>
+              <Item
+                name='gosum'
+                rules={[{ required: false }]}
+              >
+                <div className='editor-container'>
+                  <Editor
+                    value={gosum}
+                    onValueChange={c => onChange('gosum', c)}
+                    highlight={code => highlight((code || ''), languages.go, 'go')}
+                    padding={16}
+                    tabSize={4}
+                    insertSpaces
+                    className='editor'
+                    style={{
+                      fontFamily: '"Arial", "Open Sans", monospace',
+                      fontSize: 14
+                    }}
+                  />
+                </div>
+              </Item>
+            </Form>
+          </div>
+        </div>
       </div>
     </>
   )

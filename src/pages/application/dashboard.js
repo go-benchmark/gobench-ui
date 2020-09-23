@@ -26,7 +26,6 @@ const DefaultPage = ({ detail, groups, dispatch }) => {
     <>
       <div className='application-dashboard'>
         <Helmet title='Application| Dashboard' />
-        <h3>Dashboard</h3>
         {(isArray(groups) && groups.length > 0) &&
       groups.map((group, index) => {
         return (

@@ -17,7 +17,7 @@ const DefaultPage = ({ detail }) => {
     <>
       <div className='application-scenario'>
         <Helmet title='Application| scenario' />
-        <h3>Scenario</h3>
+        <h5>Scenario</h5>
         <div>
           <div className='application-scenario editor-container'>
             <Editor
