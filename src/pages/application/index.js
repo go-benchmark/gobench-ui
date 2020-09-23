@@ -22,17 +22,21 @@ const DefaultPage = ({ application, dispatch }) => {
     {
       title: 'ID',
       dataIndex: 'id',
-      key: 'id'
+      key: 'id',
+      sorter: (a, b) => a.name.length - b.name.length
     },
     {
       title: 'Status',
       dataIndex: 'status',
       key: 'status',
+      sorter: (a, b) => a.name.length - b.name.length,
       render: (text, item) => (
         <>
-          <Tag color={statusColors[text]} key={item.id}>
-            {text.toUpperCase()}
-          </Tag>
+          <Link key={item.id} to={`/applications/${item.id}`}>
+            <Tag color={statusColors[text]} key={item.id}>
+              {text.toUpperCase()}
+            </Tag>
+          </Link>
         </>
       )
     },
@@ -40,6 +44,7 @@ const DefaultPage = ({ application, dispatch }) => {
       title: 'Name',
       dataIndex: 'name',
       key: 'name',
+      sorter: (a, b) => a.name.length - b.name.length,
       render: (text, item) => <Link key={item.id} to={`/applications/${item.id}`}>{text}</Link>
     },
     {
@@ -63,6 +68,7 @@ const DefaultPage = ({ application, dispatch }) => {
       title: 'Created at',
       dataIndex: 'created_at',
       key: 'created',
+      sorter: (a, b) => a.name.length - b.name.length,
       render: x => {
         return new Date(x).toLocaleString()
       }
@@ -129,11 +135,12 @@ const DefaultPage = ({ application, dispatch }) => {
       setFetching(true)
     }
   }, [list, total])
-  const onTableChange = pagination => {
+  const onTableChange = (pagination, filters, sorter, extra) => {
+    console.log(filters, sorter, extra)
     setPagination(pagination)
     dispatch({
       type: 'application/LIST',
-      payload: { skip: pagination.current - 1, limit: pagination.pageSize }
+      payload: { skip: pagination.current - 1, limit: pagination.pageSize, pagination, filters, sorter }
     })
   }
   const onSearch = (e) => {

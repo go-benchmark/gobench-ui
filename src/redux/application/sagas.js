@@ -8,9 +8,9 @@ import {
 } from 'services/application'
 
 export function * LIST ({ payload }) {
-  const { skip, limit, name, zone, dtms } = payload
+  const { skip, limit } = payload
   yield loading(true)
-  const response = yield call(list, skip, limit, name, zone, dtms)
+  const response = yield call(list, skip, limit)
   if (response) {
     yield put({
       type: 'application/SET_STATE',
