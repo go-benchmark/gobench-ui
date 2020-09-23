@@ -14,6 +14,11 @@ const routes = [
     exact: true
   },
   {
+    path: '/applications/create',
+    Component: lazy(() => import('pages/application/create')),
+    exact: true
+  },
+  {
     path: '/applications/:id',
     Component: lazy(() => import('pages/application/detail')),
     exact: true

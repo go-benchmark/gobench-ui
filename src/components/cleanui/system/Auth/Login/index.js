@@ -50,7 +50,6 @@ const Login = ({ dispatch, user, authProvider, logo }) => {
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
           className="mb-4"
-          initialValues={{ email: 'admin', password: '12345612' }}
         >
           <Form.Item
             name="email"

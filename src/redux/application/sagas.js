@@ -1,5 +1,7 @@
-import { all, put, call, takeEvery } from 'redux-saga/effects'
+import { all, put, call, takeEvery, select } from 'redux-saga/effects'
+import { notification } from 'antd'
 import actions from './actions'
+import { history } from 'index'
 import {
   list, detail, create, update, destroy, cancel,
   getGroups, getGraphs, getGraphMetrics, getCounters, getHistograms, getGauges, getMetrics, getMetricData, getMetricDataRealtime, getMetricDataPolling
@@ -35,9 +37,14 @@ export function * DETAIL ({ payload }) {
   loading(false)
 }
 export function * CREATE ({ payload }) {
-  const { data } = payload
+  const { name, scenario, gomod, gosum } = payload
   loading(true)
-  const response = yield call(create, data)
+  const response = yield call(create, {
+    name,
+    scenario: window.btoa(unescape(encodeURIComponent(scenario))),
+    gomod: window.btoa(unescape(encodeURIComponent(gomod))),
+    gosum: window.btoa(unescape(encodeURIComponent(gosum)))
+  })
   if (response) {
     yield put({
       type: 'application/SET_STATE',
@@ -45,7 +52,20 @@ export function * CREATE ({ payload }) {
         detail: response
       }
     })
+    notification.success({
+      message: 'Application created',
+      description: 'You have successfully created an application!'
+    })
+    history.push(`/applications/${response.id}`)
   }
+  // clear clone data
+  yield put({
+    type: 'application/SET_STATE',
+    payload: {
+      clone: undefined
+    }
+  })
+
   loading(false)
 }
 export function * CLONE ({ payload }) {
@@ -56,6 +76,7 @@ export function * CLONE ({ payload }) {
       clone: data
     }
   })
+  history.push('/applications/create')
 }
 export function * UPDATE ({ payload }) {
   const { id, data } = payload
@@ -69,31 +90,49 @@ export function * UPDATE ({ payload }) {
       }
     })
   }
+  notification.success({
+    message: 'Application updated',
+    description: 'You have successfully updated an application!'
+  })
   loading(false)
 }
 export function * CANCEL ({ payload }) {
   const { id, data } = payload
+  const state = yield select()
+  const { list } = state.application
   loading(true)
   const response = yield call(cancel, id, data)
   if (response) {
     yield put({
       type: 'application/SET_STATE',
       payload: {
-        detail: response
+        list: list.map(x => {
+          if (x.id === response.id) {
+            return response
+          }
+          return x
+        })
       }
+    })
+    notification.success({
+      message: 'Application canceled',
+      description: 'You have successfully canceled an application!'
     })
   }
   loading(false)
 }
 export function * DELETE ({ payload }) {
   const { id } = payload
+  const state = yield select()
+  const { list, total } = state.application
   loading(true)
   const response = yield call(destroy, id)
   if (response) {
     yield put({
       type: 'application/SET_STATE',
       payload: {
-        detail: response
+        list: list.filter(x => x.id !== id),
+        total: total - 1
       }
     })
   }

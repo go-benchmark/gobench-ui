@@ -3,7 +3,7 @@ import store from 'store'
 import { notification } from 'antd'
 
 const apiClient = axios.create({
-  baseURL: 'http://13.211.81.84:8080/api',
+  baseURL: 'http://localhost:8080/api',
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { Helmet } from 'react-helmet'
-import { Tabs } from 'antd'
+import { Tabs, Button } from 'antd'
 import { connect } from 'react-redux'
-import { withRouter, useParams } from 'react-router-dom'
+import { withRouter, useParams, useHistory } from 'react-router-dom'
 import Dashboard from './dashboard'
 import Scenario from './scenario'
 
@@ -12,6 +12,7 @@ const mapStateToProps = ({ application, dispatch }) => ({ detail: application.de
 
 const DefaultPage = ({ detail, dispatch }) => {
   const [fetching, setFetching] = useState(false)
+  const history = useHistory()
   const { id } = useParams()
   const { name, created, status, beginAt, endAt } = detail
   const duration = 10
@@ -34,6 +35,7 @@ const DefaultPage = ({ detail, dispatch }) => {
         <div>Begin at:{beginAt}</div>
         <div>End at:{endAt}</div>
         <div>Duration:{duration}</div>
+        <Button onClick={() => history.push('/')}>Back</Button>
         <Tabs defaultActiveKey='1'>
           <TabPane tab='Dashboard' key='1'>
             <Dashboard />

@@ -115,7 +115,6 @@ export const getMetricData = async (id = 0, type = METRIC_TYPE.COUNTER, fromTime
 
 export const getMetricDataRealtime = async (metrics, timeRange = 3600, timestamp, isRealtime) => {
   const now = new Date().getTime()
-  console.log('getMetricDataRealtime', timestamp, metrics)
   const fromTime = Math.round((now - timestamp) / 1000) < timeRange ? timestamp : (now - (timeRange * 1000))
   return await mapLimit(metrics, 5, async (m) => {
     let response

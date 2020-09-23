@@ -26,19 +26,19 @@ const DefaultPage = ({ application, dispatch }) => {
       title: 'Status',
       dataIndex: 'status',
       key: 'status',
-      render: (text, item) => <Link to={`/applications/${item.id}`}>{text}</Link>
+      render: (text, item) => <Link key={item.id} to={`/applications/${item.id}`}>{text}</Link>
     },
     {
       title: 'Name',
       dataIndex: 'name',
       key: 'name',
-      render: (text, item) => <Link to={`/applications/${item.id}`}>{text}</Link>
+      render: (text, item) => <Link key={item.id} to={`/applications/${item.id}`}>{text}</Link>
     },
     {
       title: 'Tag',
       dataIndex: 'tag',
       key: 'tag',
-      render: (text, item) => <Link to={`/applications/${item.id}`}>{text}</Link>
+      render: (text, item) => <Link key={item.id} to={`/applications/${item.id}`}>{text}</Link>
     },
     {
       title: 'Created at',
@@ -54,16 +54,7 @@ const DefaultPage = ({ application, dispatch }) => {
       key: 'action',
       render: (x, application) => {
         return (
-          <div style={{ float: 'right' }}>
-            {['finished', 'running', 'cancel'].includes(application.status) && (
-              <Button
-                type='primary'
-                onClick={() =>
-                  history.push(`/applications/${application.id}`)}
-              >
-                Detail
-              </Button>
-            )}
+          <div style={{ float: 'right' }} key={application.id}>
             <Button
               style={{ marginLeft: 5 }}
               type='default'
@@ -90,13 +81,14 @@ const DefaultPage = ({ application, dispatch }) => {
             {['finished', 'pending', 'error', 'cancel'].includes(application.status) && (
               <Popconfirm
                 title={`Are you sure delete application ${application.name}?`}
-                onConfirm={() => destroy(application)}
+                onConfirm={() => destroy(application.id)}
                 okText='Yes'
                 cancelText='No'
               >
                 <Button
                   type='primary'
-                  style={{ marginLeft: 5 }}
+                  className='delete-button'
+                  style={{ marginLeft: 5, color: 'white', backgroundColor: '#f5222d!important' }}
                   danger
                 >
                   Delete
@@ -152,7 +144,7 @@ const DefaultPage = ({ application, dispatch }) => {
   }
   const destroy = (id) => {
     dispatch({
-      type: 'application/DESTROY',
+      type: 'application/DELETE',
       payload: { id }
     })
   }
@@ -166,7 +158,7 @@ const DefaultPage = ({ application, dispatch }) => {
               <h2>Benchmark Application</h2>
             </div>
             <div className='col-md-6 col-xs-12'>
-              <Button>Create Application</Button>
+              <Button onClick={() => history.push('/applications/create')}>Create Application</Button>
             </div>
           </div>
           <div className='search-bar'>
