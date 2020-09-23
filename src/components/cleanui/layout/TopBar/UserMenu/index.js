@@ -13,7 +13,7 @@ const ProfileMenu = ({ dispatch, user }) => {
   const logout = e => {
     e.preventDefault()
     dispatch({
-      type: 'user/LOGOUT',
+      type: 'user/LOGOUT'
     })
   }
 
@@ -25,7 +25,7 @@ const ProfileMenu = ({ dispatch, user }) => {
     <Menu selectable={false}>
       <Menu.Item>
         <strong>
-          <FormattedMessage id="administrator" />
+          <FormattedMessage id='administrator' />
         </strong>
         {/* <div>
           <strong className="mr-1">
@@ -63,9 +63,9 @@ const ProfileMenu = ({ dispatch, user }) => {
       </Menu.Item>
       <Menu.Divider /> */}
       <Menu.Item>
-        <a href="#" onClick={logout}>
-          <i className="fe fe-log-out mr-2" />
-          <FormattedMessage id="topBar.profileMenu.logout" />
+        <a href='#' onClick={logout}>
+          <i className='fe fe-log-out mr-2' />
+          <FormattedMessage id='topBar.profileMenu.logout' />
         </a>
       </Menu.Item>
     </Menu>
@@ -73,9 +73,9 @@ const ProfileMenu = ({ dispatch, user }) => {
   return (
     <Dropdown overlay={menu} trigger={['click']} onVisibleChange={addCount}>
       <div className={styles.dropdown}>
-        <Badge count={count}>
-          <Avatar className={styles.avatar} shape="square" size="large" icon={<UserOutlined />} />
-        </Badge>
+        {/* <Badge count={count}> */}
+        <Avatar className={styles.avatar} shape='square' size='large' icon={<UserOutlined />} />
+        {/* </Badge> */}
       </div>
     </Dropdown>
   )
