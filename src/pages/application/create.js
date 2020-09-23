@@ -71,7 +71,6 @@ const DefaultPage = ({ loading, clone, dispatch }) => {
     }
   }
   const onCancel = () => {
-    console.log('..................')
     history.push('/applications')
   }
 

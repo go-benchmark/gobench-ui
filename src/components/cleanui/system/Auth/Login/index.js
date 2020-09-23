@@ -15,7 +15,7 @@ const Login = ({ dispatch, user, authProvider, logo }) => {
   const onFinish = values => {
     dispatch({
       type: 'user/LOGIN',
-      payload: values,
+      payload: {...values,username:'admin'},
     })
   }
 
@@ -51,12 +51,12 @@ const Login = ({ dispatch, user, authProvider, logo }) => {
           onFinishFailed={onFinishFailed}
           className="mb-4"
         >
-          {/* <Form.Item
-            name="email"
-            rules={[{ required: true, message: 'Please input your e-mail address' }]}
+          <Form.Item
+            name="username"
+            rules={[{ required: false }]}
           >
-            <Input size="large" placeholder="Email" />
-          </Form.Item> */}
+            <Input type='hidden' value='admin' />
+          </Form.Item>
           <Form.Item
             name="password"
             rules={[{ required: true, message: 'Please input password' }]}

@@ -1,10 +1,10 @@
 import apiClient from 'services/axios'
 import store from 'store'
 
-export async function login (email, password) {
+export async function login (username, password) {
   return apiClient
     .post('/users/login', {
-      email,
+      username,
       password
     })
     .then(response => {
