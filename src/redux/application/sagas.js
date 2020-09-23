@@ -275,7 +275,6 @@ export function * GRAPH_METRIC_DATA ({ payload }) {
 }
 export function * METRIC_DATA_POLLING ({ payload }) {
   const { id, metrics, data } = payload
-  console.log(data)
   yield loading(true)
   const response = yield call(getMetricDataPolling, metrics, data)
   if (response) {
