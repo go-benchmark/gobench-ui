@@ -1,6 +1,7 @@
 import axios from 'axios'
 import store from 'store'
 import { notification } from 'antd'
+import { history } from 'index'
 
 const apiClient = axios.create({
   baseURL: 'http://localhost:8080/api',
@@ -14,7 +15,7 @@ const apiClient = axios.create({
 apiClient.interceptors.request.use(request => {
   const accessToken = store.get('accessToken')
   if (accessToken) {
-    request.headers.Authorization = `${accessToken}`
+    request.headers.Authorization = `Bearer ${accessToken}`
     // request.headers.AccessToken = accessToken
   }
   return request
@@ -29,7 +30,11 @@ apiClient.interceptors.response.use(undefined, error => {
     })
     return
   }
-  let { data, statusText } = response
+  let { data, statusText, status } = response
+  console.log('res', response)
+  if (status === 401) {
+    history.push('/auth/login')
+  }
   if (data) {
     if (typeof data === 'object') {
       data = statusText

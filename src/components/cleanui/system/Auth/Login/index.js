@@ -42,7 +42,7 @@ const Login = ({ dispatch, user, authProvider, logo }) => {
       </div>
       <div className={`card ${style.container}`}>
         <div className="text-dark font-size-24 mb-3">
-          <strong>Sign in to your account</strong>
+          <strong>Enter your passphrase</strong>
         </div>
         <Form
           layout="vertical"
@@ -51,15 +51,15 @@ const Login = ({ dispatch, user, authProvider, logo }) => {
           onFinishFailed={onFinishFailed}
           className="mb-4"
         >
-          <Form.Item
+          {/* <Form.Item
             name="email"
             rules={[{ required: true, message: 'Please input your e-mail address' }]}
           >
             <Input size="large" placeholder="Email" />
-          </Form.Item>
+          </Form.Item> */}
           <Form.Item
             name="password"
-            rules={[{ required: true, message: 'Please input your password' }]}
+            rules={[{ required: true, message: 'Please input password' }]}
           >
             <Input size="large" type="password" placeholder="Password" />
           </Form.Item>

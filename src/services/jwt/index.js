@@ -49,11 +49,11 @@ export async function currentAccount () {
 }
 
 export async function logout () {
-  return apiClient
-    .get('/auth/logout')
-    .then(() => {
-      store.remove('accessToken')
-      return true
-    })
-    .catch(err => console.log(err))
+
+  // .get('/auth/logout')
+  // .then(() => {
+  //   store.remove('accessToken')
+  //   return true
+  // })
+  // .catch(err => console.log(err))
 }
