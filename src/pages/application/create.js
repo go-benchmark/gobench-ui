@@ -50,6 +50,9 @@ const DefaultPage = ({ loading, clone, dispatch }) => {
   }
   const onReset = () => {
     form.resetFields()
+    setSceraio('')
+    setGomod('')
+    setGosum('')
   }
   const onChange = (field, value) => {
     form.setFieldsValue({ [field]: value })
